@@ -46,6 +46,6 @@ Files description:
   <br>`solver.py` : solve the n-ything problem
   <br>`printer.py` : print output
   <br>`parser.py` : parse user-input into 2D array
-  
+  <br>`main.py` : run the n-ything problem solver
 
   
