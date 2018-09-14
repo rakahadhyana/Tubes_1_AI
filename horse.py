@@ -7,28 +7,36 @@ def horseEat(horse, states):
     for state in states:
         # up-right
         if (horse['y'] + 2 == state['y']) and (horse['x'] + 1 == state['x']):
-            count += 1 
+            if horse['color'] == state['color']:
+                count += 1 
         # up-left
         elif (horse['y'] + 2 == state['y']) and (horse['x'] - 1 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # down-right
         elif (horse['y'] - 2 == state['y']) and (horse['x'] + 1 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # down-left
         elif (horse['y'] - 2 == state['y']) and (horse['x'] - 1 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # right-up
         elif (horse['y'] + 1 == state['y']) and (horse['x'] + 2 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # right-down
         elif (horse['y'] - 1 == state['y']) and (horse['x'] + 2 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # left-up
         elif (horse['y'] + 1 == state['y']) and (horse['x'] - 2 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
         # left-down
         elif (horse['y'] - 1 == state['y']) and (horse['x'] - 2 == state['x']):
-            count += 1
+            if horse['color'] == state['color']:
+                count += 1
     
     return count
 
@@ -44,7 +52,7 @@ def main():
           "type": "QUEEN",
           "x": 4,
           "y": 4,
-          "color": "WHITE"
+          "color": "BLACK"
       },
       {
           "type": "QUEEN",
