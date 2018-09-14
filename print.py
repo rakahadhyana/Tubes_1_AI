@@ -1,13 +1,32 @@
 import sys
 
-
 def printBoard(states):
   board = []
   for i in range(8):
     board.append(['_', '_', '_', '_', '_', '_', '_', '_'])
   for state in states:
     board[state["y"] - 1].pop(state["x"] - 1)
-    board[state["y"] - 1].insert(state["x"] - 1, state["type"])
+    if state["type"] == "QUEEN":
+      if state["color"] == "WHITE":
+        board[state["y"] - 1].insert(state["x"] - 1, "Q")
+      else:
+        board[state["y"] - 1].insert(state["x"] - 1, "q")
+    elif state["type"] == "KNIGHT":
+      if state["color"] == "WHITE":
+        board[state["y"] - 1].insert(state["x"] - 1, "K")
+      else:
+        board[state["y"] - 1].insert(state["x"] - 1, "k")
+    elif state["type"] == "ROOK":
+      if state["color"] == "WHITE":
+        board[state["y"] - 1].insert(state["x"] - 1, "R")
+      else:
+        board[state["y"] - 1].insert(state["x"] - 1, "r")
+    else:
+      if state["color"] == "WHITE":
+        board[state["y"] - 1].insert(state["x"] - 1, "B")
+      else:
+        board[state["y"] - 1].insert(state["x"] - 1, "b")
+
   i = 8
   for row in reversed(board):
     sys.stdout.write(str(i)+" ")
