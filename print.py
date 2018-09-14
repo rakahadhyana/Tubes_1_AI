@@ -7,7 +7,7 @@ def printBoard(states):
     board.append(['_', '_', '_', '_', '_', '_', '_', '_'])
   for state in states:
     board[state["y"] - 1].pop(state["x"] - 1)
-    board[state["y"] - 1].insert(state["x"] - 1, state["jenis"])
+    board[state["y"] - 1].insert(state["x"] - 1, state["type"])
   i = 8
   for row in reversed(board):
     sys.stdout.write(str(i)+" ")

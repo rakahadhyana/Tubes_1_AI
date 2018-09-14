@@ -1,9 +1,11 @@
+from print import printBoard
+
 def rookEat(rook, state):
   count = 0
   # searc horizontal
   horizontal = []
   for catur in state:
-    if catur["x"] == rook["x"]:
+    if catur["x"] == rook["x"] and catur["y"] != rook["y"]:
       horizontal.append(catur)
   # get up and down
   up = []
@@ -13,6 +15,7 @@ def rookEat(rook, state):
       up.append(catur)
     else:
       down.append(catur)
+  print(horizontal)
   # Search nearest Up
   if len(up) > 0:
     nearestUp = up[0]
@@ -29,9 +32,49 @@ def rookEat(rook, state):
         nearestDown = catur
   if nearestDown["color"] != rook["color"]:
     count += 1
+  return count
+  # Search vertical
 
-def main():
   
+
+
+
+
+
+
+
+
+  
+def main():
+  state = [
+    {
+      "type": "ROOK",
+      "x": 2,
+      "y": 3,
+      "color": "WHITE"
+    },
+    {
+      "type": "QUEEN",
+      "x": 2,
+      "y": 5,
+      "color": "WHITE"
+    },
+    {
+      "type": "QUEEN",
+      "x": 2,
+      "y": 7,
+      "color": "WHITE"
+    },
+    {
+      "type": "QUEEN",
+      "x": 2,
+      "y": 1,
+      "color": "WHITE"
+    }
+  ]
+  printBoard(state)
+  print(rookEat(state[0], state))
+
 
 if __name__ == '__main__':
   main()
