@@ -62,84 +62,6 @@ def rookEat(rook, state):
       count += 1
   return count
 
-<<<<<<< HEAD:solve.py
-def bishopEat(bishop, state):
-  count_right_diagonal = 0
-  # search right diagonal /
-  right_diagonal = []
-  for catur in state:
-    if catur["x"] - bishop["x"] == catur["y"] - bishop["y"]:
-      right_diagonal.append(catur)
-  # get up and down
-  upright = []
-  downleft = []
-  for catur in right_diagonal:
-    if catur["x"] > bishop["x"] and catur["y"] > bishop["y"]:
-      upright.append(catur)
-    elif catur["x"] < bishop["x"] and catur["y"] < bishop["y"]:
-      downleft.append(catur)
-  print(right_diagonal)
-  # Search nearest Up
-  if len(upright) > 0:
-    nearestUpright = upright[0]
-    for catur in upright:
-      if catur["x"] - bishop["x"] < nearestUpright["x"] - bishop["x"] and catur["y"] - bishop["y"] < nearestUpright["y"] - bishop["y"]:
-        nearestUpright = catur
-    if nearestUpright["color"] != bishop["color"]:
-      count_right_diagonal += 1
-  # Search nearest Down
-  if len(downleft) > 0:
-    nearestDownleft = downleft[0]
-    for catur in downleft:
-      if bishop["y"] - catur["y"] < bishop["y"] - nearestDownleft["y"] and bishop["y"] - catur["y"] < bishop["y"] - nearestDownleft["y"]:
-        nearestDownleft = catur
-    if nearestDownleft["color"] != bishop["color"]:
-      count_right_diagonal += 1
-  
-  # search left diagonal /
-  count_left_diagonal = 0
-  left_diagonal = []
-  for catur in state:
-    if catur["x"] + catur["y"] == bishop["x"] + bishop["y"]:
-      left_diagonal.append(catur)
-  # get up and down
-  upleft = []
-  downright = []
-  for catur in left_diagonal:
-    if catur["x"] < bishop["x"] and catur["y"] > bishop["y"]:
-      upleft.append(catur)
-    elif catur["x"] > bishop["x"] and catur["y"] < bishop["y"]:
-      downright.append(catur)
-  print(left_diagonal)
-  # Search nearest Up
-  if len(upleft) > 0:
-    nearestUpleft = upleft[0]
-    for catur in upleft:
-      if catur["x"] - bishop["x"] > nearestUpleft["x"] - bishop["x"] and catur["y"] - bishop["y"] > nearestUpleft["y"] - bishop["y"]:
-        nearestUpleft = catur
-    if nearestUpleft["color"] != bishop["color"]:
-      count_left_diagonal += 1
-  # Search nearest Down
-  if len(downright) > 0:
-    nearestDownright = downright[0]
-    for catur in downright:
-      if bishop["y"] - catur["y"] > bishop["y"] - nearestDownright["y"] and bishop["y"] - catur["y"] > bishop["y"] - nearestDownright["y"]:
-        nearestDownright = catur
-    if nearestDownright["color"] != bishop["color"]:
-      count_left_diagonal += 1
-  count = count_left_diagonal + count_right_diagonal
-  return count
-
-
-
-
-
-
-
-
-  
-=======
->>>>>>> 1a126f16c32e4826dcfb83293ad5a291aeaf00e5:rook.py
 def main():
   state = [
     {
@@ -152,52 +74,19 @@ def main():
       "type": "QUEEN",
       "x": 2,
       "y": 5,
-      "color": "BLACK"
+      "color": "WHITE"
     },
     {
       "type": "QUEEN",
       "x": 2,
       "y": 7,
-      "color": "BLACK"
+      "color": "WHITE"
     },
     {
       "type": "QUEEN",
       "x": 2,
       "y": 1,
-      "color": "BLACK"
-    },
-	{
-	  "type": "QUEEN",
-      "x": 5,
-      "y": 3,
-      "color": "BLACK"
-	},
-	{
-	  "type": "BISHOP",
-      "x": 2,
-      "y": 2,
       "color": "WHITE"
-<<<<<<< HEAD:solve.py
-	},
-	{
-	  "type": "QUEEN",
-      "x": 1,
-      "y": 1,
-      "color": "BLACK"
-	},
-	{
-	  "type": "QUEEN",
-      "x": 3,
-      "y": 1,
-      "color": "BLACK"
-	},
-	{
-	  "type": "QUEEN",
-      "x": 1,
-      "y": 3,
-      "color": "BLACK"
-	}
-=======
     },
     {
       "type": "BISHOP",
@@ -205,12 +94,9 @@ def main():
       "y": 3,
       "color": "BLACK"
     }
->>>>>>> 1a126f16c32e4826dcfb83293ad5a291aeaf00e5:rook.py
   ]
   printBoard(state)
   print(rookEat(state[0], state))
-  print("ngentot")
-  print(bishopEat(state[5], state))
 
 
 if __name__ == '__main__':
