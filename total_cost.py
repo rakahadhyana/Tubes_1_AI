@@ -16,7 +16,7 @@ def totalCost(state):
       cost = bishopEat(bidak, state)
     elif bidak["type"] == "KNIGHT":
       cost = horseEat(bidak, state)
-    print(bidak["x"] , bidak["y"] , cost)        
+    # print(bidak["x"] , bidak["y"] , cost)        
     total_cost_same += cost["same"]
     total_cost_diff += cost["diff"]
   return {"total_same" : total_cost_same, "total_diff" : total_cost_diff}

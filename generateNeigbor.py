@@ -1,5 +1,6 @@
 import sys
-from printx import printBoard
+import copy
+from print import printBoard
 
 def generateNeighbor(state):
     neighbors = []
@@ -17,11 +18,12 @@ def generateNeighbor(state):
                 if (found==True):
                     movedElmt["x"] = i
                     movedElmt["y"] = j
-                    neighbors.append(curstate)
-                    printBoard(curstate)
+                    neighbors.append(copy.deepcopy(curstate))
+                    # print(curstate)
+                    # printBoard(curstate)
         movedElmt["x"] = initx
         movedElmt["y"] = inity
-    print(len(neighbors))
+    # print(len(neighbors))
 
     return neighbors
 
@@ -63,8 +65,8 @@ def main():
     }
   ]
   neighbor = generateNeighbor(state)
-  printBoard(state)
-
+  for x in neighbor:
+    print(x)
 
 
 if __name__ == '__main__':
