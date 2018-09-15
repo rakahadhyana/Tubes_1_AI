@@ -66,7 +66,7 @@ def horseEat(horse, states):
 def main():
   states = [
       {
-          "type": "HORSE",
+          "type": "KNIGHT",
           "x": 2,
           "y": 3,
           "color": "WHITE"
