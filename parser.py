@@ -1,11 +1,12 @@
 def parse(filename):
     data = open(filename, 'r')
-    lines = data.readline()
+    lines = data.readlines()
 
     states = []
 
+    print(lines)
     for line in lines:
-        line.split()
+        line = line.split()
         
         state = {}
         state['color'] = line[0]
@@ -15,3 +16,5 @@ def parse(filename):
         states.append(state)
 
     print(states)
+
+parse("input.txt")
