@@ -1,5 +1,8 @@
+from print import printBoard
+
 def bishopEat(bishop, state):
-  count_right_diagonal = 0
+  count_right_diagonal_same = 0
+  count_right_diagonal_diff = 0
   # search right diagonal /
   right_diagonal = []
   for catur in state:
@@ -13,7 +16,7 @@ def bishopEat(bishop, state):
       upright.append(catur)
     elif catur["x"] < bishop["x"] and catur["y"] < bishop["y"]:
       downleft.append(catur)
-  print(right_diagonal)
+  # print(right_diagonal)
   # Search nearest Up
   if len(upright) > 0:
     nearestUpright = upright[0]
@@ -21,7 +24,9 @@ def bishopEat(bishop, state):
       if catur["x"] - bishop["x"] < nearestUpright["x"] - bishop["x"] and catur["y"] - bishop["y"] < nearestUpright["y"] - bishop["y"]:
         nearestUpright = catur
     if nearestUpright["color"] != bishop["color"]:
-      count_right_diagonal += 1
+      count_right_diagonal_diff += 1
+    else:
+      count_right_diagonal_same += 1  
   # Search nearest Down
   if len(downleft) > 0:
     nearestDownleft = downleft[0]
@@ -29,10 +34,13 @@ def bishopEat(bishop, state):
       if bishop["y"] - catur["y"] < bishop["y"] - nearestDownleft["y"] and bishop["y"] - catur["y"] < bishop["y"] - nearestDownleft["y"]:
         nearestDownleft = catur
     if nearestDownleft["color"] != bishop["color"]:
-      count_right_diagonal += 1
+      count_right_diagonal_diff += 1
+    else:
+      count_right_diagonal_same += 1 
   
   # search left diagonal /
-  count_left_diagonal = 0
+  count_left_diagonal_diff = 0
+  count_left_diagonal_same = 0
   left_diagonal = []
   for catur in state:
     if catur["x"] + catur["y"] == bishop["x"] + bishop["y"]:
@@ -45,7 +53,7 @@ def bishopEat(bishop, state):
       upleft.append(catur)
     elif catur["x"] > bishop["x"] and catur["y"] < bishop["y"]:
       downright.append(catur)
-  print(left_diagonal)
+  # print(left_diagonal)
   # Search nearest Up
   if len(upleft) > 0:
     nearestUpleft = upleft[0]
@@ -53,7 +61,9 @@ def bishopEat(bishop, state):
       if catur["x"] - bishop["x"] > nearestUpleft["x"] - bishop["x"] and catur["y"] - bishop["y"] > nearestUpleft["y"] - bishop["y"]:
         nearestUpleft = catur
     if nearestUpleft["color"] != bishop["color"]:
-      count_left_diagonal += 1
+      count_left_diagonal_diff += 1
+    else:
+      count_left_diagonal_same += 1  
   # Search nearest Down
   if len(downright) > 0:
     nearestDownright = downright[0]
@@ -61,6 +71,48 @@ def bishopEat(bishop, state):
       if bishop["y"] - catur["y"] > bishop["y"] - nearestDownright["y"] and bishop["y"] - catur["y"] > bishop["y"] - nearestDownright["y"]:
         nearestDownright = catur
     if nearestDownright["color"] != bishop["color"]:
-      count_left_diagonal += 1
-  count = count_left_diagonal + count_right_diagonal
-  return count
+      count_left_diagonal_diff += 1
+    else:
+      count_left_diagonal_same += 1
+  count_same = count_left_diagonal_same + count_right_diagonal_same      
+  count_diff = count_left_diagonal_diff + count_right_diagonal_diff
+  return {"same": count_same, "diff": count_diff} 
+
+def main():
+  state = [
+    {
+      "type": "BISHOP",
+      "x": 2,
+      "y": 3,
+      "color": "WHITE"
+    },
+    {
+      "type": "QUEEN",
+      "x": 4,
+      "y": 5,
+      "color": "BLACK"
+    },
+    {
+      "type": "QUEEN",
+      "x": 1,
+      "y": 4,
+      "color": "WHITE"
+    },
+    {
+      "type": "QUEEN",
+      "x": 1,
+      "y": 2,
+      "color": "WHITE"
+    },
+    {
+      "type": "ROOK",
+      "x": 6,
+      "y": 3,
+      "color": "BLACK"
+    }
+  ]
+  printBoard(state)
+  print(bishopEat(state[0], state))  
+
+if __name__ == '__main__':
+  main()

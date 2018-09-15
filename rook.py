@@ -1,7 +1,8 @@
 from print import printBoard
 
 def rookEat(rook, state):
-  count = 0
+  countDiff = 0
+  countSame = 0
   # searc horizontal
   horizontal = []
   for catur in state:
@@ -22,7 +23,9 @@ def rookEat(rook, state):
       if catur["y"] - rook["y"] < nearestUp["y"] - rook["y"]:
         nearestUp = catur
     if nearestUp["color"] != rook["color"]:
-      count += 1
+      countDiff += 1
+    else:
+      countSame += 1  
   # Search nearest Down
   if len(down) > 0:
     nearestDown = down[0]
@@ -30,7 +33,9 @@ def rookEat(rook, state):
       if rook["y"] - catur["y"] < rook["y"] - nearestDown["y"]:
         nearestDown = catur
     if nearestDown["color"] != rook["color"]:
-      count += 1
+      countDiff += 1
+    else:
+      countSame += 1 
   # Search vertical
   vertical = []
   for catur in state:
@@ -51,7 +56,9 @@ def rookEat(rook, state):
       if catur["x"] - rook["x"] < nearestRight["x"] - rook["x"]:
         nearestRight = catur
     if nearestRight["color"] != rook["color"]:
-      count += 1
+      countDiff += 1
+    else:
+      countSame += 1 
   # Search nearest Left
   if len(left) > 0:
     nearestLeft = left[0]
@@ -59,8 +66,10 @@ def rookEat(rook, state):
       if rook["x"] - catur["x"] < rook["x"] - nearestLeft["x"]:
         nearestLeft = catur
     if nearestLeft["color"] != rook["color"]:
-      count += 1
-  return count
+      countDiff += 1
+    else:
+      countSame += 1  
+  return {"same": countSame, "diff": countDiff}
 
 def main():
   state = [
