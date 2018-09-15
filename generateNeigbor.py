@@ -1,9 +1,8 @@
 import sys
 from printx import printBoard
 
-def generateNeighbor(state, neighbors):
+def generateNeighbor(state):
     neighbors = []
-    newElmt = {}
     curstate = list(state)
     count = 0
     for movedElmt in curstate:
@@ -13,7 +12,7 @@ def generateNeighbor(state, neighbors):
             for j in range(1,9):
                 found = True
                 for elmt in state:
-                    if (i==elmt["x"]) and (j==elmt["y"]):
+                    if (i==elmt["x"] and j==elmt["y"]) or (initx==i and inity==j):
                         found = False
                 if (found==True):
                     movedElmt["x"] = i
@@ -24,7 +23,11 @@ def generateNeighbor(state, neighbors):
         movedElmt["y"] = inity
     print(len(neighbors))
 
-# def evaluateCost(neighbors):
+    return neighbors
+
+#def evaluateCost(neighbors):
+
+
 #    for elmt in neighbors:
 def main():
   state = [
@@ -59,9 +62,9 @@ def main():
       "color": "BLACK"
     }
   ]
-  neighbor = []
+  neighbor = generateNeighbor(state)
   printBoard(state)
-  generateNeighbor(state,neighbor)
+
 
 
 if __name__ == '__main__':
