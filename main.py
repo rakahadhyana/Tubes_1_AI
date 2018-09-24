@@ -3,6 +3,7 @@ from init import init
 from print import printBoard
 from hill_climbing import hillClimbing
 from simulated_annealing import simulated_annealing
+from genetic_algorithm import genetic_algorithm
 
 def main():
     print("TUBES I IF3170 INTELIGENSI BUATAN")
@@ -29,7 +30,7 @@ def main():
             simulated_annealing(states)
         elif (algo=='3'):
             print("BOARD AWAL")
-            #panggil genetic algorithm
+            genetic_algorithm(states)
         elif (algo=='4'):
             print('Program selesai')
             stop = True

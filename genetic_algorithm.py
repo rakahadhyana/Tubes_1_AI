@@ -1,40 +1,65 @@
-from parser import init
+from generateNeigbor import generateNeighbor
 from total_cost import totalCost
+from print import printBoard
+from init import init
 import random as rand
+from copy import deepcopy
 
 def genetic_cross(states):
     parents = []
     heads = []
     tails = []
-    k = rand.randint(1, len(states))
+    k = rand.randint(1, len(states)-1)
+    print("k = " + str(k))
+    print()
 
+    # parent initiation
     for x in range(4):
-        parents.append(init(states))
-
+        current = deepcopy(init(states))
+        print("PARENT " + str(x+1))
+        printBoard(current)
+        print(totalCost(current))
+        parents.append(current)
+        
+    # heads initiation
     for x in range(4):
-        heads.append(parents[x][:k])
-
+        heads.append(deepcopy(parents[x][:k]))
+    
+    # tail initiation
     for x in range(4):
-        tails.append(parents[0][k:])
+        tails.append(deepcopy(parents[0][k:]))
 
-    children = [heads[0]+tails[1], heads[1]+tails[0],
-                heads[3]+tails[2], heads[3]+tails[2]]
+    # cross
+    children = [{},{},{},{}]
+    children[0]['states'] = deepcopy(heads[0]+tails[1])
+    children[1]['states'] = deepcopy(heads[1]+tails[0])
+    children[2]['states'] = deepcopy(heads[3]+tails[2])
+    children[3]['states'] = deepcopy(heads[3]+tails[2])
 
     return fitness_function(children)
 
 def fitness_function(states):
     max_diff = 0
     max_same = 0
-    total_pairs = len(states)*len(states)
+    total_pairs = len(states[0]['states'])*len(states[0]['states'])
+    print(total_pairs)
+    x = 0
 
+    # input the cost of each parent
     for state in states:
-        state['total_diff'] = totalCost(state)['total_diff']
-        state['total_same'] = totalCost(state)['total_same']
-        max_diff += totalCost(state)['total_diff']
-        max_same += total_pairs - totalCost(state)['total_same']
+        print("PARENT AFTER CROSS " + str(x+1))
+        x += 1
+        printBoard(state['states'])
+        state_cost = totalCost(state['states'])
+        state['total_diff'] = state_cost['total_diff']
+        state['total_same'] = state_cost['total_same']
+        print(state_cost)
+        max_diff += state['total_diff']
+        max_same += (total_pairs - state['total_same'])
 
     for state in states:
         state['fitness_value'] = state['total_diff']/max_diff + state['total_same']/max_same
+        print(state['fitness_value'])
     
     max = 0
     best_state = {}
@@ -44,38 +69,7 @@ def fitness_function(states):
             max = state['fitness_value']
             best_state = state
 
-    return best_state
+    return best_state['states']
 
-def main():
-  states = [
-      {
-          "type": "KNIGHT",
-          "x": 2,
-          "y": 3,
-          "color": "WHITE"
-      },
-      {
-          "type": "QUEEN",
-          "x": 4,
-          "y": 4,
-          "color": "BLACK"
-      },
-      {
-          "type": "QUEEN",
-          "x": 4,
-          "y": 2,
-          "color": "WHITE"
-      },
-      {
-          "type": "QUEEN",
-          "x": 2,
-          "y": 1,
-          "color": "WHITE"
-      }
-  ]
-
-  genetic_cross(states)
-
-
-if __name__ == '__main__':
-  main()
+def genetic_algorithm(states):
+    printBoard(genetic_cross(states))
