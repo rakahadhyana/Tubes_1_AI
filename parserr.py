@@ -19,11 +19,4 @@ def parse(filename):
         for i in range(0,count) :
             statex = copy.deepcopy(state)
             states.append(statex)
-    print(states)
     return states
-
-# def main():
-    # parse("input.txt")
-
-# if __name__ == '__main__':
-#   main()

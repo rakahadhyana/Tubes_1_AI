@@ -24,41 +24,23 @@ def totalCost(state):
 def main():
   state = [
     {
-      "type": "QUEEN",
-      "x": 2,
+      "type": "BISHOP",
+      "x": 3,
       "y": 3,
-      "color": "WHITE"
+      "color": "BLACK"
     },
     {
-      "type": "QUEEN",
+      "type": "BISHOP",
       "x": 4,
-      "y": 5,
-      "color": "BLACK"
-    },
-    {
-      "type": "QUEEN",
-      "x": 1,
       "y": 4,
-      "color": "WHITE"
-    },
-    {
-      "type": "QUEEN",
-      "x": 1,
-      "y": 2,
-      "color": "WHITE"
-    },
-    {
-      "type": "ROOK",
-      "x": 6,
-      "y": 3,
       "color": "BLACK"
     },
     {
-      "type": "KNIGHT",
-      "x": 5,
-      "y": 6,
-      "color": "WHITE"
-    }    
+      "type": "BISHOP",
+      "x": 2,
+      "y": 4,
+      "color": "BLACK"
+    }   
   ]
   printBoard(state)
   print(totalCost(state))

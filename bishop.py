@@ -82,32 +82,20 @@ def main():
   state = [
     {
       "type": "BISHOP",
-      "x": 2,
+      "x": 3,
       "y": 3,
-      "color": "WHITE"
-    },
-    {
-      "type": "QUEEN",
-      "x": 4,
-      "y": 5,
       "color": "BLACK"
     },
     {
-      "type": "QUEEN",
-      "x": 1,
+      "type": "BISHOP",
+      "x": 4,
       "y": 4,
-      "color": "WHITE"
+      "color": "BLACK"
     },
     {
-      "type": "QUEEN",
-      "x": 1,
-      "y": 2,
-      "color": "WHITE"
-    },
-    {
-      "type": "ROOK",
-      "x": 6,
-      "y": 3,
+      "type": "BISHOP",
+      "x": 2,
+      "y": 4,
       "color": "BLACK"
     }
   ]
