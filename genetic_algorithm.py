@@ -87,7 +87,6 @@ def genetic_algorithm(states):
     x = 1
 
     while not(found):
-        local = 0
         print("\n\nCROSS " + str(x))
         parents = deepcopy(eliminate(parents))
         children = deepcopy(genetic_cross(parents))
@@ -95,12 +94,18 @@ def genetic_algorithm(states):
         children = deepcopy(fitness_function(children))
         children = deepcopy(sorted(children, key=lambda k: k['fitness_value'], reverse=True))
 
-        if abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.1:
-            local += 1
-        elif local == 10:
+
+        # INI NENTUIN BERENTINYA BELOM FIX
+        if parents[0]['fitness_value'] == children[0]['fitness_value']:
             found = True
         else:
             parents = deepcopy(children)
-            local = 0
+        x += 1
     print()
     printBoard(parents[0]['states'])
+
+
+# abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.1:
+#             local += 1
+#         elif local == 10:
+#             found = True
