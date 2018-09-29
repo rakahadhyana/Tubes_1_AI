@@ -54,13 +54,13 @@ def fitness_function(states):
 
     return states
 
-def eliminate(states):
+def selection(states):
     sorted_states = deepcopy(sorted(states, key=lambda k: k['fitness_value'], reverse=True))
     sorted_states.pop()
 
     return sorted_states
 
-def genetic_cross(parents):
+def crossover(parents):
     k = rand.randint(1, len(parents[0]['states'])-1)
     print("k = " + str(k) + "\n")
 
@@ -80,32 +80,36 @@ def genetic_cross(parents):
 
     return children
 
+# def mutation(children):
+
+
 def genetic_algorithm(states):
     parents = deepcopy(make_generation(states))
     parents = deepcopy(fitness_function(parents))
     found = False
     x = 1
+    iterator = 1
 
     while not(found):
         print("\n\nCROSS " + str(x))
-        parents = deepcopy(eliminate(parents))
-        children = deepcopy(genetic_cross(parents))
+        parents = deepcopy(selection(parents))
+        children = deepcopy(crossover(parents))
         print()
         children = deepcopy(fitness_function(children))
         children = deepcopy(sorted(children, key=lambda k: k['fitness_value'], reverse=True))
 
-
         # INI NENTUIN BERENTINYA BELOM FIX
-        if parents[0]['fitness_value'] == children[0]['fitness_value']:
+        if iterator == 100:
+            found = True
+        elif abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.001:
+            x += 1
+            parents = deepcopy(children)
+        elif x == 5:
             found = True
         else:
+            x = 1
             parents = deepcopy(children)
-        x += 1
+        iterator += 1
+        print(iterator)
     print()
     printBoard(parents[0]['states'])
-
-
-# abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.1:
-#             local += 1
-#         elif local == 10:
-#             found = True
