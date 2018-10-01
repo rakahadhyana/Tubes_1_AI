@@ -1,6 +1,8 @@
 from generateNeigbor import generateNeighbor
 from total_cost import totalCost
 from print import printBoard
+from init import checkEquals
+from init import coordinateRandom
 from init import init
 import random as rand
 from copy import deepcopy
@@ -80,8 +82,18 @@ def crossover(parents):
 
     return children
 
-# def mutation(children):
+def mutation(children):
+    for states in children:
+        for state in states['states']:
+            coordinate = {}
+            coordinate['x'] = state['x']
+            coordinate['y'] = state['y']
+            while checkEquals(coordinate, states['states']) == True:
+                coordinate = coordinateRandom()
+            state['x'] = coordinate['x']
+            state['y'] = coordinate['y']
 
+    return children
 
 def genetic_algorithm(states):
     parents = deepcopy(make_generation(states))
@@ -91,9 +103,10 @@ def genetic_algorithm(states):
     iterator = 1
 
     while not(found):
-        print("\n\nCROSS " + str(x))
+        print("\n\nCROSS " + str(iterator))
         parents = deepcopy(selection(parents))
         children = deepcopy(crossover(parents))
+        children = deepcopy(mutation(children))
         print()
         children = deepcopy(fitness_function(children))
         children = deepcopy(sorted(children, key=lambda k: k['fitness_value'], reverse=True))
@@ -110,6 +123,5 @@ def genetic_algorithm(states):
             x = 1
             parents = deepcopy(children)
         iterator += 1
-        print(iterator)
     print()
     printBoard(parents[0]['states'])
