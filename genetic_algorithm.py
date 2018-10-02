@@ -110,7 +110,7 @@ def genetic_algorithm(states):
         print("\n\nCROSS " + str(iterator))
         parents = deepcopy(selection(parents))
         children = deepcopy(crossover(parents))
-        children = deepcopy(mutation(children))
+        # children = deepcopy(mutation(children))
         print()
         children = deepcopy(fitness_function(children))
         children = deepcopy(sorted(children, key=lambda k: k['fitness_value'], reverse=True))
@@ -130,5 +130,4 @@ def genetic_algorithm(states):
         print("iteration number - " + str(iterator))
         iterator += 1
     print()
-    fitness_function(parents)
-    print_info(parents[0]['states'])
+    print_info(children[0]['states'])
