@@ -24,6 +24,7 @@ def make_generation(states):
 def print_info(state):
     printBoard(state)
     print(totalCost(state))
+    print()
 
 def insert_cost(state):
     state_cost = totalCost(state['states'])
@@ -56,6 +57,7 @@ def fitness_function(states):
 
     return states
 
+# sort states based on fitness value (big to small), remove which has the smallest value
 def selection(states):
     sorted_states = deepcopy(sorted(states, key=lambda k: k['fitness_value'], reverse=True))
     sorted_states.pop()
@@ -75,7 +77,7 @@ def crossover(parents):
 
     x = 0
     for child in children:    
-        print("PARENT AFTER CROSS " + str(x+1))
+        print("AFTER CROSS " + str(x+1))
         child = deepcopy(insert_cost(child))
         print_info(child['states'])
         x += 1
@@ -117,11 +119,14 @@ def genetic_algorithm(states):
         elif abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.001:
             x += 1
             parents = deepcopy(children)
-        elif x == 5:
+        elif x == 7:
             found = True
         else:
             x = 1
             parents = deepcopy(children)
+        print("\n=============================================\n")
+        print("iteration number - " + str(iterator))
         iterator += 1
     print()
-    printBoard(parents[0]['states'])
+    fitness_function(parents)
+    print_info(parents[0]['states'])

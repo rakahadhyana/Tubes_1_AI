@@ -47,8 +47,8 @@ def simulated_annealing(states):
     i += 1
 
 
-def main():
-  simulated_annealing()
+# def main():
+#   simulated_annealing()
 
-if __name__ == '__main__':
-  main()
+# if __name__ == '__main__':
+#   main()
