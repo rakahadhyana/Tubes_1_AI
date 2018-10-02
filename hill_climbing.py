@@ -37,15 +37,16 @@ def hillClimbing(states):
         # print(neighbor_cost)
         # print("not best")
       i += 1
-    print("best_neighbor")    
-    printBoard(best_neighbor)
-    print(totalCost(best_neighbor))
-    print()
-    print("=============================================")
-    print()
+
     if best_neighbor_cost['total_diff'] - best_neighbor_cost['total_same'] < current_cost['total_diff'] - current_cost['total_same']:
       isLocalMax = True
     else:
+      print("best_neighbor")
+      printBoard(best_neighbor)
+      print(totalCost(best_neighbor))
+      print()
+      print("=============================================")
+      print()
       current = best_neighbor
       print("current")
       printBoard(current)
