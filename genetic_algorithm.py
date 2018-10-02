@@ -23,6 +23,7 @@ def make_generation(states):
 
 def print_info(state):
     printBoard(state)
+    print(state)
     print(totalCost(state))
     print()
 
@@ -45,12 +46,12 @@ def fitness_function(states):
 
     # count the total of non-attacking pairs of elements
     for state in states:
-        sum_pairs += max_pairs - (state['total_diff'] + state['total_same'])
+        sum_pairs += max_pairs + state['total_diff'] - state['total_same']
 
     x = 0
     # count the fitness value of each state
     for state in states:
-        state['fitness_value'] = (max_pairs - (state['total_diff'] + state['total_same']))/sum_pairs
+        state['fitness_value'] = (max_pairs + state['total_diff'] - state['total_same'])/sum_pairs
         print("FITNESS " + str(x+1))
         print(state['fitness_value'])
         x += 1
@@ -72,8 +73,8 @@ def crossover(parents):
     children = [{},{},{},{}]
     children[0]['states'] = deepcopy(parents[0]['states'][:k]+parents[1]['states'][k:])
     children[1]['states'] = deepcopy(parents[1]['states'][:k]+parents[0]['states'][k:])
-    children[2]['states'] = deepcopy(parents[1]['states'])
-    children[3]['states'] = deepcopy(parents[2]['states'])
+    children[2]['states'] = deepcopy(parents[1]['states'][:k]+parents[2]['states'][k:])
+    children[3]['states'] = deepcopy(parents[2]['states'][:k]+parents[1]['states'][k:])
 
     x = 0
     for child in children:    
@@ -98,6 +99,7 @@ def mutation(children):
     return children
 
 def genetic_algorithm(states):
+    max_iterate = int(input("Tentukan iterasi maksimum : "))
     parents = deepcopy(make_generation(states))
     parents = deepcopy(fitness_function(parents))
     found = False
@@ -114,7 +116,7 @@ def genetic_algorithm(states):
         children = deepcopy(sorted(children, key=lambda k: k['fitness_value'], reverse=True))
 
         # INI NENTUIN BERENTINYA BELOM FIX
-        if iterator == 100:
+        if iterator == max_iterate:
             found = True
         elif abs(parents[0]['fitness_value'] - children[0]['fitness_value']) < 0.001:
             x += 1

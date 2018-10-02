@@ -29,8 +29,8 @@ def main():
             print("BOARD AWAL")
             simulated_annealing(states)
         elif (algo=='3'):
-            print("BOARD AWAL")
             genetic_algorithm(states)
+            print("BOARD AWAL")
         elif (algo=='4'):
             print('Program selesai')
             stop = True
