@@ -1,5 +1,6 @@
 from generateNeigbor import generateNeighbor
 from total_cost import totalCost
+from hill_climbing import hillClimbing
 from print import printBoard
 from init import init
 import random
@@ -19,7 +20,7 @@ def simulated_annealing(states):
     print(i+1)
     if temperature > 0:
       temperature = temperature - t
-    print(temperature) 
+    print("temperature:", temperature) 
     neighbor = generateNeighbor(current)
     next = neighbor[random.randint(0, len(neighbor)-1)]
     next_cost = totalCost(next)
@@ -34,11 +35,10 @@ def simulated_annealing(states):
           print("same")
         else:
           print("worse")
-        print(delta_E)
+        print("Delta E =", delta_E)
         probability = math.exp(delta_E/temperature)
         p = random.random()
-        print(probability)
-        print(p)
+        print("Probability =", probability)
         if p <= probability:
           print("accepted")
           current = next

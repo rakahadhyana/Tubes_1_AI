@@ -40,6 +40,11 @@ def hillClimbing(states):
 
     if best_neighbor_cost['total_diff'] - best_neighbor_cost['total_same'] < current_cost['total_diff'] - current_cost['total_same']:
       isLocalMax = True
+      print("LOCAL MAX")
+      print("============== HASIL AKHIR ==============")
+      printBoard(current)
+      print(totalCost(current))
+      print()
     else:
       print("best_neighbor")
       printBoard(best_neighbor)
@@ -53,4 +58,10 @@ def hillClimbing(states):
       print(totalCost(current))
       print()
     iteration += 1
+    if iteration > max_iteration:
+      print("============== HASIL AKHIR ==============")
+      printBoard(current)
+      print(totalCost(current))
+      print()
+
   return current        
