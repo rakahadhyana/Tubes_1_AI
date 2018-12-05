@@ -48,4 +48,9 @@ Files description:
   <br>`parser.py` : parse user-input into 2D array
   <br>`main.py` : run the n-ything problem solver
 
-  
+## Authors
+* **Dinda Yora Islami** - 13516067
+* **Haifa Fadhila Ilma** - 13516076
+* **Timothy Thamrin A. H. S** - 13516090
+* **Raka Hadhyana** - 13516099
+* **Dimas Aditia Pratikto** - 13516153
